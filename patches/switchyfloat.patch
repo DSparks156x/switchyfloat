@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/sync.yml b/.github/workflows/sync.yml
+index 43db88a..6e37193 100644
+--- a/.github/workflows/sync.yml
++++ b/.github/workflows/sync.yml
+@@ -36,7 +36,7 @@ jobs:
+           git remote add upstream https://github.com/lukash/refloat.git
+           
+           #Fetch tags and the main branch from upstream
+-          git fetch upstream --tags
++          git fetch upstream --tags --force
+ 
+           # Use the GitHub CLI to sync the fork
+           gh repo sync ${{ github.repository }} --branch main

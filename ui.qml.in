@@ -1,14 +1,14 @@
 // Copyright 2022 Benjamin Vedder <benjamin@vedder.se>
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Switchyfloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Switchyfloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Switchyfloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -407,7 +407,7 @@ Item {
             }
         }
 
-        // Called explicitly after the Write button in Refloat Cfg qml page is pressed
+        // Called explicitly after the Write button in Switchyfloat Cfg qml page is pressed
         function configWritten() {
             disarmDueUpdate();
             unsetDefault();
@@ -1546,13 +1546,13 @@ Item {
             if (packageConfig.isDefault()) {
                 var backup = loadBackup("auto_backup_" + board.getId());
                 if (backup) {
-                    print("Refloat: Automatic backup restore.");
+                    print("Switchyfloat: Automatic backup restore.");
                     applyConfigDialog.show(backup, true, false);
                 } else {
-                    print("Refloat: No automatic backup to restore.");
+                    print("Switchyfloat: No automatic backup to restore.");
                 }
             } else {
-                print("Refloat: Automatic config backup.");
+                print("Switchyfloat: Automatic config backup.");
                 autoBackup();
             }
         }
@@ -4170,12 +4170,12 @@ Item {
             // There is no reliable "config updated" signal, we have to hook onto
             // the VESC Tool custom config buttons (works for QML only, not
             // for the desktop app config page).
-            print("Refloat: Hooking custom config Write button...");
+            print("Switchyfloat: Hooking custom config Write button...");
             customConfigWriteButton = locateButton(confCustomLoader.item, "Write");
             if (customConfigWriteButton) {
                 customConfigWriteButton.clicked.connect(packageConfig.configWritten);
             } else {
-                print("Refloat: Failed to locate Write button.");
+                print("Switchyfloat: Failed to locate Write button.");
             }
         }
 
@@ -4188,11 +4188,11 @@ Item {
 
     Component.onDestruction: {
         if (typeof confCustomLoader !== typeof undefined) {
-            print("Refloat: Unhooking custom config Write button...");
+            print("Switchyfloat: Unhooking custom config Write button...");
             if (customConfigWriteButton) {
                 customConfigWriteButton.clicked.disconnect(packageConfig.configWritten);
             } else {
-                print("Refloat: Write button was not set.");
+                print("Switchyfloat: Write button was not set.");
             }
         }
     }
@@ -4442,7 +4442,7 @@ Item {
                         Button {
                             Layout.alignment: Qt.AlignHCenter
 
-                            text: state.pkgState === state.s_Disabled ? "Enable Refloat" : "Disable Refloat"
+                            text: state.pkgState === state.s_Disabled ? "Enable Switchyfloat" : "Disable Switchyfloat"
 
                             onClicked: {
                                 packageConfig.setDisabled(state.pkgState !== state.s_Disabled);
@@ -5068,14 +5068,14 @@ Item {
                 }
 
                 ErrDesc {
-                    text: "Refloat package is disabled. After you're done with board setup, re-enable it."
+                    text: "Switchyfloat package is disabled. After you're done with board setup, re-enable it."
                     visible: state.pkgState === state.s_Disabled
                 }
 
                 Button {
                     Layout.alignment: Qt.AlignHCenter
 
-                    text: "Enable Refloat"
+                    text: "Enable Switchyfloat"
                     visible: state.pkgState === state.s_Disabled
 
                     onClicked: {
@@ -5089,7 +5089,7 @@ Item {
                 }
 
                 ErrText {
-                    text: "Refloat Cfg failed to load"
+                    text: "Switchyfloat Cfg failed to load"
                     visible: state.configLoadingError
                 }
 
@@ -5602,7 +5602,7 @@ Item {
         }
 
         Page {
-            title: "Welcome to Refloat"
+            title: "Welcome to Switchyfloat"
             anchors.centerIn: parent
             width: parent.width - 20
             padding: 10
@@ -5637,7 +5637,7 @@ Item {
                     id: welcomeMessage
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
-                    text: "If you haven't configured your board yet, make sure to configure your motor and IMU before you try to ride the board.\n\nTo run the motor wizard, you need to disable the Refloat package first. You can do so in Refloat Settings > Setup, which you can access using the cog button in the top right corner of the main Refloat screen.\n\nAfter the setup, you can safely verify your board balances correctly using the Handtest mode.\n\nTo configure Refloat, you need to set the High and Low Voltage Thresholds in Refloat Cfg > Specs according to your battery voltage. The rest of the configuration options has defaults that should provide you with a well-behaving, rideable board.\n\nHappy shredding!\n\nGo to Settings > Setup now?"
+                    text: "If you haven't configured your board yet, make sure to configure your motor and IMU before you try to ride the board.\n\nTo run the motor wizard, you need to disable the Switchyfloat package first. You can do so in Switchyfloat Settings > Setup, which you can access using the cog button in the top right corner of the main Switchyfloat screen.\n\nAfter the setup, you can safely verify your board balances correctly using the Handtest mode.\n\nTo configure Switchyfloat, you need to set the High and Low Voltage Thresholds in Switchyfloat Cfg > Specs according to your battery voltage. The rest of the configuration options has defaults that should provide you with a well-behaving, rideable board.\n\nHappy shredding!\n\nGo to Settings > Setup now?"
                 }
 
                 CheckBox {
@@ -7327,7 +7327,7 @@ Item {
             Layout.fillWidth: true
             font.pixelSize: 0.2 * unit
             horizontalAlignment: Text.AlignHCenter
-            text: "Refloat v{{VERSION}}"
+            text: "Switchyfloat v{{VERSION}}"
         }
     }
 }

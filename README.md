@@ -1,8 +1,10 @@
-# Refloat - VESC Package
-Refloat is a VESC Package for self-balancing skateboards. It aims to:
+# Switchyfloat - VESC Package
+![BenderFloat](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjliM3pyYm42eTgxbGFjaWE2dHZpamx6eXppMDJvdmJsaXdha3d2NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Tfs6p2WScChVn3HluH/giphy.gif)
+
+Switchyfloat is a VESC Package for self-balancing skateboards. It aims to:
 - Provide a polished and full-featured user experience
 - Maintain a clean and reliable codebase that is easy to extend
-- Make it easy for anyone to use Refloat as a base for experimentation
+- Make it easy for anyone to use Switchyfloat as a base for experimentation
 - Standardize interfaces so that package clones can interact with other parts of the ecosystem (3rd party apps, light modules, VESC Express addons etc.) in a compatible way
 
 _**If you're looking for README of the actual package, you can find it [here](package_README.md).**_

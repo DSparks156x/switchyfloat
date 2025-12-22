@@ -6,6 +6,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-beta[0-9]+'
       - '*-preview[0-9]+'
+  workflow_dispatch:
 
 jobs:
   create_release:
@@ -56,8 +57,8 @@ jobs:
 
       - name: Rename Package File
         run: |
-          mv refloat.vescpkg refloat-${{env.VERSION}}.vescpkg
-          mv src/package_lib.elf refloat-${{env.VERSION}}.elf
+          mv switchyfloat.vescpkg switchyfloat-${{env.VERSION}}.vescpkg
+          mv src/package_lib.elf switchyfloat-${{env.VERSION}}.elf
 
       - name: Install Changelog Generation Dependencies
         run: sudo apt-get install python3-git
@@ -74,9 +75,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{github.ref}}
-          name: Refloat ${{env.VERSION}}
+          name: Switchyfloat ${{env.VERSION}}
           draft: true
-          artifacts: "refloat-${{env.VERSION}}.vescpkg,refloat-${{env.VERSION}}.elf,config_signature.txt"
+          artifacts: "switchyfloat-${{env.VERSION}}.vescpkg,switchyfloat-${{env.VERSION}}.elf,config_signature.txt"
           bodyFile: "release_notes.md"
           prerelease: ${{env.PRERELEASE}}
           allowUpdates: true

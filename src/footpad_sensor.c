@@ -1,13 +1,13 @@
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Switchyfloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Switchyfloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Switchyfloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -26,9 +26,9 @@ void footpad_sensor_init(FootpadSensor *fs) {
 }
 
 void footpad_sensor_update(FootpadSensor *fs, const RefloatConfig *config) {
-    fs->adc1 = VESC_IF->io_read_analog(VESC_PIN_ADC1);
+    fs->adc1 = VESC_IF->io_read_analog(VESC_PIN_ADC2);
     // Returns -1.0 if the pin is missing on the hardware
-    fs->adc2 = VESC_IF->io_read_analog(VESC_PIN_ADC2);
+    fs->adc2 = VESC_IF->io_read_analog(VESC_PIN_ADC1);
     if (fs->adc2 < 0.0) {
         fs->adc2 = 0.0;
     }

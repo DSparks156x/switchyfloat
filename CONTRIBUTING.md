@@ -1,5 +1,5 @@
 # Contributing
-Bugfix Pull Requests are always welcome. If you want to implement a feature, it is advised get in touch first, to make sure your feature is in line with the direction Refloat development is heading.
+Bugfix Pull Requests are always welcome. If you want to implement a feature, it is advised get in touch first, to make sure your feature is in line with the direction Switchyfloat development is heading.
 
 ## Commit Messages
 Use descriptive (but succint) commit title. For non-trivial commits, add a short commit description with any due explanation.
@@ -24,13 +24,13 @@ Date:   Sun Sep 17 13:35:16 2023 +0200
     Feature: Separate Mahony KP configuration between package and firmware
      >
      Mahony KP configuration is now separate between the App Config
-     (firmware) and the Refloat Config (package). The App Config KP is now
+     (firmware) and the Switchyfloat Config (package). The App Config KP is now
      used for "true pitch", meaning a standard KP of less than 1 is
      required. (Float used Mahony KP of 0.2, here 0.4 is used, as it seems
      to work better)
      >
      To make the transition seamless and to ensure no misconfiguration
-     happens, Refloat will set the following values in App Config -> IMU if
+     happens, Switchyfloat will set the following values in App Config -> IMU if
      it detects Mahony KP greater than 1 being configured there:
      >
      - Mahony KP: 0.4
@@ -42,8 +42,8 @@ Date:   Sun Sep 17 13:35:16 2023 +0200
      You don't need to do anything when transitioning from Float package,
      but you can check the values are as described after installation.
      >
-     A new Refloat Config item Accelerometer Confidence Decay has been
-     added to the package, which is used for the Refloat balance filter.
+     A new Switchyfloat Config item Accelerometer Confidence Decay has been
+     added to the package, which is used for the Switchyfloat balance filter.
 ```
 
 That is, use `>` as a new line marker and indent all lines with a single space.
@@ -73,7 +73,7 @@ clang-format -i src/*.{h,c}
 But, it's better to use git hooks.
 
 ## Git Hooks
-Refloat uses `pre-commit` for managing git hooks. Again, you need to install this dependency in your development environment. Then run this to install the commit hook in the repo:
+Switchyfloat uses `pre-commit` for managing git hooks. Again, you need to install this dependency in your development environment. Then run this to install the commit hook in the repo:
 ```sh
 pre-commit install
 ```

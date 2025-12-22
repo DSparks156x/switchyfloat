@@ -1,10 +1,10 @@
 # Commands Reference
 
-Commands are binary messages that can be used to interact with Refloat. They can be sent from a client device (e.g. a Bluetooth-connected phone app) or from a device component connected to the VESC bus (e.g. a VESC Express, or an UART device). All messages are broadcast to all components connected to the bus on VESC level (meaning above the package level). Each component decides whether it will process a given message.
+Commands are binary messages that can be used to interact with Switchyfloat. They can be sent from a client device (e.g. a Bluetooth-connected phone app) or from a device component connected to the VESC bus (e.g. a VESC Express, or an UART device). All messages are broadcast to all components connected to the bus on VESC level (meaning above the package level). Each component decides whether it will process a given message.
 
 On VESC level, there is a (VESC-level) command designated for package commands (it's called `COMM_CUSTOM_APP_DATA`). The payload of this command is what is sent and received by the package. For clients using a VESC API (e.g. a QML VESC Tool app) there's a function to send this command. Clients communicating with VESC outside of its ecosystem need to construct the message with its first byte set to this VESC command ID (the value of which is `36`). The rest of this documentation only deals with the payload of this VESC command and disregards the first byte.
 
-The convention for package commands is the first byte of the message is the identifier of the package interface: `package_interface_id` (also formerly called `magic` in Float). Refloat currently only processes commands with `package_interface_id` = `101` (same as Float).
+The convention for package commands is the first byte of the message is the identifier of the package interface: `package_interface_id` (also formerly called `magic` in Float). Switchyfloat currently only processes commands with `package_interface_id` = `101` (same as Float).
 
 The second byte is the `command_id`. So each package command starts with what we could call a "command header" of the following format:
 

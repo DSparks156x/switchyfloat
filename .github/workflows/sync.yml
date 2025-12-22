@@ -1,0 +1,89 @@
+name: Sync Upstream and Apply Patch
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+  workflow_dispatch:   # Allows you to trigger it manually
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for merging
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync with Upstream
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        run: |
+          # Backup patch and workflow files before sync (as sync deletes them)
+          mkdir -p /tmp/switchyfloat_backup/patches
+          mkdir -p /tmp/switchyfloat_backup/.github/workflows
+          cp patches/switchyfloat.patch /tmp/switchyfloat_backup/patches/
+          cp .github/workflows/sync.yml /tmp/switchyfloat_backup/.github/workflows/
+
+          # Replace 'PARENT_OWNER/PARENT_REPO' with the actual parent repo path
+          git remote add upstream https://github.com/lukash/refloat.git
+          
+          #Fetch tags and the main branch from upstream
+          git fetch upstream --tags --force
+
+          # Use the GitHub CLI to sync the fork
+          gh repo sync ${{ github.repository }} --branch main
+          
+          # Pull the synced changes locally
+          git pull origin main
+
+          # Restore patch and workflow files
+          mkdir -p patches
+          mkdir -p .github/workflows
+          cp /tmp/switchyfloat_backup/patches/switchyfloat.patch patches/
+          cp /tmp/switchyfloat_backup/.github/workflows/sync.yml .github/workflows/
+
+      - name: Apply Patch and Push Tags
+        run: |
+          if [ -f "patches/switchyfloat.patch" ]; then
+            if git apply -R --check patches/switchyfloat.patch; then
+              echo "Patch already applied, skipping."
+            else
+              # Use --reject to apply what is possible (ignoring deleted files/conflicts)
+              # || true suppresses the exit code so the workflow continues
+              git apply --reject patches/switchyfloat.patch || true
+              
+              # Remove rejection files to prevent clutter
+              find . -name "*.rej" -type f -delete
+              
+              git add .
+              git commit -m "Switchyfloated" -m "Feature: Switched ADCs to correctly reflect ADC 1 being right and ADC 2 being left"
+              git push https://x-access-token:${{ secrets.WORKFLOW_TOKEN }}@github.com/${{ github.repository }} main
+            fi
+            
+            # Retarget upstream tags to the patched HEAD
+            # We assume upstream tags are pointing to the commit tracked by upstream/main
+            # or we just iterate over all tags at upstream/main
+            UPSTREAM_COMMIT=$(git rev-parse upstream/main)
+            TAGS=$(git tag --points-at $UPSTREAM_COMMIT)
+            
+            if [ -n "$TAGS" ]; then
+              echo "Retargeting tags: $TAGS to HEAD"
+              for tag in $TAGS; do
+                git tag -f -a -m "Switchyfloat Release" "$tag" HEAD
+              done
+              git push https://x-access-token:${{ secrets.WORKFLOW_TOKEN }}@github.com/${{ github.repository }} --tags --force
+            else
+              echo "No tags found on upstream/main to retarget."
+            fi
+            
+          else
+            echo "Patch file not found, skipping."
+          fi

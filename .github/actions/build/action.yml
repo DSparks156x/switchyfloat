@@ -11,7 +11,7 @@ runs:
     - uses: cachix/install-nix-action@v25
     - uses: cachix/cachix-action@v14
       with:
-        name: refloat
+        name: switchyfloat
         authToken: '${{ inputs.cache-auth-token }}'
     - uses: rrbutani/use-nix-shell-action@v1
       with:

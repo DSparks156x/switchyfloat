@@ -1,13 +1,13 @@
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Switchyfloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Switchyfloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Switchyfloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -131,7 +131,7 @@ void lcm_light_info_response(const LcmData *lcm) {
     buffer[ind++] = 101;  // Package ID
     buffer[ind++] = COMMAND_LCM_LIGHT_INFO;
 
-    // Lights control for Refloat is not compatible with this interface; Send 3
+    // Lights control for Switchyfloat is not compatible with this interface; Send 3
     // for LCM (3 is he identifier for external led module in Float), otherwise 0.
     buffer[ind++] = lcm->enabled ? 3 : 0;
 

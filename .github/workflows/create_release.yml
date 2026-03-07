@@ -6,6 +6,11 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-beta[0-9]+'
       - '*-preview[0-9]+'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g. v6.7.0)'
+        required: true
 
 jobs:
   create_release:
@@ -20,7 +25,7 @@ jobs:
 
       - name: Extract Version
         run: |
-          TAG="${{github.ref_name}}"
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
           if [[ $TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
             echo "VERSION=${TAG#v}" >> $GITHUB_ENV
           else
@@ -36,6 +41,7 @@ jobs:
           else
             echo "PREVIEW=false" >> $GITHUB_ENV
           fi
+          echo "TAG=${TAG}" >> $GITHUB_ENV
 
 
       - name: Check Tag Matches Version
@@ -71,7 +77,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{github.ref}}
+          tag: ${{env.TAG}}
           name: Lefloat ${{env.VERSION}}
           draft: true
           artifacts: "lefloat-${{env.VERSION}}.vescpkg,lefloat-${{env.VERSION}}.elf,config_signature.txt"

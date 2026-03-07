@@ -1,14 +1,14 @@
 // Copyright 2022 Dado Mista
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -33,12 +33,12 @@ void torque_tilt_reset(TorqueTilt *tt) {
     tt->setpoint = 0.0f;
 }
 
-void torque_tilt_configure(TorqueTilt *tt, const RefloatConfig *config) {
+void torque_tilt_configure(TorqueTilt *tt, const LefloatConfig *config) {
     tt->on_step_size = config->torquetilt_on_speed / config->hertz;
     tt->off_step_size = config->torquetilt_off_speed / config->hertz;
 }
 
-void torque_tilt_update(TorqueTilt *tt, const MotorData *motor, const RefloatConfig *config) {
+void torque_tilt_update(TorqueTilt *tt, const MotorData *motor, const LefloatConfig *config) {
     float strength =
         motor->braking ? config->torquetilt_strength_regen : config->torquetilt_strength;
 

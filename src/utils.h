@@ -1,13 +1,13 @@
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -33,7 +33,7 @@
         if (!VESC_IF->app_is_output_disabled()) {                                                  \
             float t = VESC_IF->system_time();                                                      \
             uint32_t decimals = (uint32_t) ((t - (uint32_t) t) * 1000000);                         \
-            VESC_IF->printf("%d.%.6d [refloat] " fmt, (uint32_t) t, decimals, ##__VA_ARGS__);      \
+            VESC_IF->printf("%d.%.6d [lefloat] " fmt, (uint32_t) t, decimals, ##__VA_ARGS__);      \
         }                                                                                          \
     } while (0)
 
@@ -47,7 +47,7 @@
             float t = VESC_IF->system_time();                                                      \
             uint32_t decimals = (uint32_t) ((t - (uint32_t) t) * 1000000);                         \
             VESC_IF->printf(                                                                       \
-                "%d.%.6d [refloat] " fmt, (uint32_t) t, decimals __VA_OPT__(, ) __VA_ARGS__        \
+                "%d.%.6d [lefloat] " fmt, (uint32_t) t, decimals __VA_OPT__(, ) __VA_ARGS__        \
             );                                                                                     \
         }                                                                                          \
     } while (0)

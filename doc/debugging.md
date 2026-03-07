@@ -1,4 +1,4 @@
-# Debugging Refloat
+# Debugging Lefloat
 
 The package can be debugged in GDB the standard way if the package symbols are loaded from the package .elf file.
 
@@ -15,7 +15,7 @@ Keep this process running in its own terminal.
 
 An ARM version of GDB is needed, and it needs to have a working Python scripting support.
 
-In a second terminal, change to the `refloat` repo directory. It contains the `.gdbinit` file with commands to load the package .elf and for debuging it.
+In a second terminal, change to the `lefloat` repo directory. It contains the `.gdbinit` file with commands to load the package .elf and for debuging it.
 
 The correct firmware .elf file is needed, it's built along with the firmware binary for the ESC in question:
 ```sh

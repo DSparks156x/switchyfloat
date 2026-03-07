@@ -56,8 +56,8 @@ jobs:
 
       - name: Rename Package File
         run: |
-          mv refloat.vescpkg refloat-${{env.VERSION}}.vescpkg
-          mv src/package_lib.elf refloat-${{env.VERSION}}.elf
+          mv lefloat.vescpkg lefloat-${{env.VERSION}}.vescpkg
+          mv src/package_lib.elf lefloat-${{env.VERSION}}.elf
 
       - name: Install Changelog Generation Dependencies
         run: sudo apt-get install python3-git
@@ -74,9 +74,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{github.ref}}
-          name: Refloat ${{env.VERSION}}
+          name: Lefloat ${{env.VERSION}}
           draft: true
-          artifacts: "refloat-${{env.VERSION}}.vescpkg,refloat-${{env.VERSION}}.elf,config_signature.txt"
+          artifacts: "lefloat-${{env.VERSION}}.vescpkg,lefloat-${{env.VERSION}}.elf,config_signature.txt"
           bodyFile: "release_notes.md"
           prerelease: ${{env.PRERELEASE}}
           allowUpdates: true

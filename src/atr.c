@@ -1,14 +1,14 @@
 // Copyright 2022 Dado Mista
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -38,7 +38,7 @@ void atr_reset(ATR *atr) {
     atr->setpoint = 0.0f;
 }
 
-void atr_configure(ATR *atr, const RefloatConfig *config) {
+void atr_configure(ATR *atr, const LefloatConfig *config) {
     atr->on_step_size = config->atr_on_speed / config->hertz;
     atr->off_step_size = config->atr_off_speed / config->hertz;
 
@@ -50,7 +50,7 @@ void atr_configure(ATR *atr, const RefloatConfig *config) {
     }
 }
 
-void atr_update(ATR *atr, const MotorData *motor, const RefloatConfig *config) {
+void atr_update(ATR *atr, const MotorData *motor, const LefloatConfig *config) {
     float abs_torque = fabsf(motor->filt_current);
     float torque_offset = 8;  // hard-code to 8A for now (shouldn't really be changed much anyways)
     float atr_threshold = motor->braking ? config->atr_threshold_down : config->atr_threshold_up;

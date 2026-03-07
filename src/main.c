@@ -2,14 +2,14 @@
 // Copyright 2022 Benjamin Vedder <benjamin@vedder.se>
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -757,7 +757,7 @@ static void imu_ref_callback(float *acc, float *gyro, float *mag, float dt) {
     balance_filter_update(&d->balance_filter, gyro, acc, dt);
 }
 
-static void refloat_thd(void *arg) {
+static void lefloat_thd(void *arg) {
     Data *d = (Data *) arg;
 
     configure(d);
@@ -1093,7 +1093,7 @@ static void write_cfg_to_eeprom(Data *d) {
     }
     memset(buffer, 0, bufsize);
 
-    uint32_t written_bytes = confparser_serialize_refloatconfig((uint8_t *) buffer, &d->float_conf);
+    uint32_t written_bytes = confparser_serialize_lefloatconfig((uint8_t *) buffer, &d->float_conf);
     if (written_bytes > bufsize) {
         log_error("Config write buffer overflow, terminating.");
         fatal_error_terminate();
@@ -1168,13 +1168,13 @@ static void read_cfg_from_eeprom(Data *d) {
     }
 
     if (read_ok) {
-        if (!confparser_deserialize_refloatconfig((uint8_t *) buffer, &d->float_conf)) {
+        if (!confparser_deserialize_lefloatconfig((uint8_t *) buffer, &d->float_conf)) {
             log_error("Failed to deserialize config, using defaults.");
-            confparser_set_defaults_refloatconfig(&d->float_conf);
+            confparser_set_defaults_lefloatconfig(&d->float_conf);
         }
     } else {
         log_error("Failed to read config, using defaults.");
-        confparser_set_defaults_refloatconfig(&d->float_conf);
+        confparser_set_defaults_lefloatconfig(&d->float_conf);
     }
 
     VESC_IF->free(buffer);
@@ -2332,19 +2332,19 @@ static lbm_value ext_bms(lbm_value *args, lbm_uint argn) {
 static int get_cfg(uint8_t *buffer, bool is_default) {
     Data *d = (Data *) ARG;
 
-    RefloatConfig *cfg;
+    LefloatConfig *cfg;
     if (is_default) {
-        cfg = VESC_IF->malloc(sizeof(RefloatConfig));
+        cfg = VESC_IF->malloc(sizeof(LefloatConfig));
         if (!cfg) {
             log_error("Failed to send default config to VESC tool: Out of memory.");
             return 0;
         }
-        confparser_set_defaults_refloatconfig(cfg);
+        confparser_set_defaults_lefloatconfig(cfg);
     } else {
         cfg = &d->float_conf;
     }
 
-    int res = confparser_serialize_refloatconfig(buffer, cfg);
+    int res = confparser_serialize_lefloatconfig(buffer, cfg);
 
     if (is_default) {
         VESC_IF->free(cfg);
@@ -2357,12 +2357,12 @@ static int get_cfg(uint8_t *buffer, bool is_default) {
 static bool set_cfg(uint8_t *buffer) {
     Data *d = (Data *) ARG;
 
-    // don't let users use the Refloat Cfg "write" button in special modes
+    // don't let users use the Lefloat Cfg "write" button in special modes
     if (d->state.mode != MODE_NORMAL) {
         return false;
     }
 
-    bool res = confparser_deserialize_refloatconfig(buffer, &d->float_conf);
+    bool res = confparser_deserialize_lefloatconfig(buffer, &d->float_conf);
 
     // don't allow to disable the package in the RUNNING state
     if (d->state.state == STATE_RUNNING) {
@@ -2384,12 +2384,12 @@ static bool set_cfg(uint8_t *buffer) {
 }
 
 static int get_cfg_xml(uint8_t **buffer) {
-    // Note: As the address of data_refloatconfig_ is not known
+    // Note: As the address of data_lefloatconfig_ is not known
     // at compile time it will be relative to where it is in the
     // linked binary. Therefore we add PROG_ADDR to it so that it
     // points to where it ends up on the STM32.
-    *buffer = data_refloatconfig_ + PROG_ADDR;
-    return DATA_REFLOATCONFIG__SIZE;
+    *buffer = data_lefloatconfig_ + PROG_ADDR;
+    return DATA_LEFLOATCONFIG__SIZE;
 }
 
 // Called when code is stopped
@@ -2433,15 +2433,15 @@ INIT_FUN(lib_info *info) {
         beeper_init();
     }
 
-    d->main_thread = VESC_IF->spawn(refloat_thd, 1536, "Refloat Main", d);
+    d->main_thread = VESC_IF->spawn(lefloat_thd, 1536, "Lefloat Main", d);
     if (!d->main_thread) {
-        log_error("Failed to spawn Refloat Main thread.");
+        log_error("Failed to spawn Lefloat Main thread.");
         return false;
     }
 
-    d->aux_thread = VESC_IF->spawn(aux_thd, 1024, "Refloat Aux", d);
+    d->aux_thread = VESC_IF->spawn(aux_thd, 1024, "Lefloat Aux", d);
     if (!d->aux_thread) {
-        log_error("Failed to spawn Refloat Auxiliary thread.");
+        log_error("Failed to spawn Lefloat Auxiliary thread.");
         VESC_IF->request_terminate(d->main_thread);
         return false;
     }

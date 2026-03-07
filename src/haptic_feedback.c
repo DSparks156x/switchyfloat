@@ -1,13 +1,13 @@
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -32,7 +32,7 @@ void haptic_feedback_init(HapticFeedback *hf) {
     hf->can_change_type = true;
 }
 
-void haptic_feedback_configure(HapticFeedback *hf, const RefloatConfig *cfg) {
+void haptic_feedback_configure(HapticFeedback *hf, const LefloatConfig *cfg) {
     hf->cfg = &cfg->haptic;
     hf->duty_solid_threshold = cfg->tiltback_duty + hf->cfg->duty_solid_offset;
 

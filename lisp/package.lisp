@@ -10,8 +10,8 @@
         (progn
             (import "bms.lisp" 'bms)
             (read-eval-program bms)
-            (spawn "Refloat BMS" 50 bms-loop)
+            (spawn "Lefloat BMS" 50 bms-loop)
         )
-        (print "[refloat] BMS Integration: Unsupported firmware version, 6.05+ required.")
+        (print "[lefloat] BMS Integration: Unsupported firmware version, 6.05+ required.")
     )
 )

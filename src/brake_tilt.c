@@ -1,14 +1,14 @@
 // Copyright 2022 Dado Mista
 // Copyright 2024 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -33,7 +33,7 @@ void brake_tilt_reset(BrakeTilt *bt) {
     bt->setpoint = 0.0f;
 }
 
-void brake_tilt_configure(BrakeTilt *bt, const RefloatConfig *config) {
+void brake_tilt_configure(BrakeTilt *bt, const LefloatConfig *config) {
     if (config->braketilt_strength == 0) {
         bt->factor = 0;
     } else {
@@ -46,7 +46,7 @@ void brake_tilt_update(
     BrakeTilt *bt,
     const MotorData *motor,
     const ATR *atr,
-    const RefloatConfig *config,
+    const LefloatConfig *config,
     float balance_offset
 ) {
     // braking also should cause setpoint change lift, causing a delayed lingering nose lift

@@ -1,13 +1,13 @@
 // Copyright 2025 Lukas Hrazky
 //
-// This file is part of the Refloat VESC package.
+// This file is part of the Lefloat VESC package.
 //
-// Refloat VESC package is free software: you can redistribute it and/or modify
+// Lefloat VESC package is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by the
 // Free Software Foundation, either version 3 of the License, or (at your
 // option) any later version.
 //
-// Refloat VESC package is distributed in the hope that it will be useful, but
+// Lefloat VESC package is distributed in the hope that it will be useful, but
 // WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 // or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
@@ -30,11 +30,11 @@ void remote_reset(Remote *remote) {
     remote->ramped_step_size = 0;
 }
 
-void remote_configure(Remote *remote, const RefloatConfig *config) {
+void remote_configure(Remote *remote, const LefloatConfig *config) {
     remote->step_size = config->inputtilt_speed / config->hertz;
 }
 
-void remote_input(Remote *remote, const RefloatConfig *config) {
+void remote_input(Remote *remote, const LefloatConfig *config) {
     bool connected = false;
     float value = 0;
 
@@ -72,7 +72,7 @@ void remote_input(Remote *remote, const RefloatConfig *config) {
     remote->input = value;
 }
 
-void remote_update(Remote *remote, const State *state, const RefloatConfig *config) {
+void remote_update(Remote *remote, const State *state, const LefloatConfig *config) {
     float target = remote->input * config->inputtilt_angle_limit;
 
     if (state->darkride) {

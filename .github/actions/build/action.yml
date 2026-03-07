@@ -7,7 +7,7 @@ runs:
     - uses: cachix/install-nix-action@v25
     - uses: rrbutani/use-nix-shell-action@v1
       with:
-        flakes: nixpkgs/nixos-24.11#gcc-arm-embedded-13, nixpkgs#gnumake, github:DSparks156x/vesc_tool-flake/release_6_06
+        flakes: nixpkgs/nixos-24.11#gcc-arm-embedded-13, nixpkgs#gnumake, github:lukash/vesc_tool-flake/release_6_06
 
     - name: Build
       shell: bash

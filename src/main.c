@@ -1,6 +1,6 @@
 // Copyright 2019 - 2022 Mitch Lustig
 // Copyright 2022 Benjamin Vedder <benjamin@vedder.se>
-// Copyright 2024 Lukas Hrazky
+// Copyright 2024 Evil Penguin
 //
 // This file is part of the Lefloat VESC package.
 //

@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 Lukas Hrazky
+// Copyright 2023 - 2024 Evil Penguin
 //
 // This file is part of the Lefloat VESC package.
 //
@@ -25,7 +25,7 @@
 // 02/10/2011   SOH Madgwick    Optimized for reduced CPU load
 // 26/01/2014   Benjamin V      Adaption to our platform
 // 20/02/2017   Benjamin V      Added Madgwick algorithm and refactoring
-// 17/09/2023   Lukas Hrazky    Adopted from vedderb/bldc, modified for self-balancing skateboard
+// 17/09/2023   Evil Penguin    Adopted from vedderb/bldc, modified for self-balancing skateboard
 //
 //=====================================================================================================
 

@@ -4,7 +4,7 @@ The package provides an easy-to-use mechanism to track realtime values which are
 
 ## Data Recording
 
-The package allows to record a short period of realtime data into an internal memory buffer at the native loop frequency. This functionality requires a special firmware that reserves the buffer in memory and passes its address and size to the package. This firmware can be found here: https://github.com/lukash/bldc/tree/release_6_05-datarecord
+The package allows to record a short period of realtime data into an internal memory buffer at the native loop frequency. This functionality requires a special firmware that reserves the buffer in memory and passes its address and size to the package. This firmware can be found here: https://github.com/DSparks156x/bldc/tree/release_6_05-datarecord
 
 The firmware with this information is automatically detected and advertised via `capabilities` in the [INFO](commands/INFO.md) command. In the package UI, the controls automatically appear in such case.
 

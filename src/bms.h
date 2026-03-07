@@ -1,5 +1,5 @@
 // Copyright 2024 Syler Clayton
-// Copyright 2025 Lukas Hrazky
+// Copyright 2025 Evil Penguin
 //
 // This file is part of the Lefloat VESC package.
 //

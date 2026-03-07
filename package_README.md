@@ -36,4 +36,4 @@ Author: Lukáš Hrázký
 Original Float package authors: Mitch Lustig, Dado Mista, Nico Aleman
 
 ## Downloads and Changelogs
-[https://github.com/lukash/lefloat/releases](https://github.com/lukash/lefloat/releases)
+[https://github.com/DSparks156x/lefloat/releases](https://github.com/DSparks156x/lefloat/releases)

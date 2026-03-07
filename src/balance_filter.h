@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 Lukas Hrazky
+// Copyright 2023 - 2024 Evil Penguin
 //
 // This file is part of the Lefloat VESC package.
 //

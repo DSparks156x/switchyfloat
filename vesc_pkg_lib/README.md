@@ -5,11 +5,11 @@ This is a VESC Package library containing the necessary files to build a VESC Pa
 ## Adding the library to a repository
 
 ```bash
-git subtree add --prefix vesc_pkg_lib https://github.com/lukash/vesc_pkg_lib.git main --squash
+git subtree add --prefix vesc_pkg_lib https://github.com/DSparks156x/vesc_pkg_lib.git main --squash
 ```
 
 ## Updating the library in a repository to a new version
 
 ```bash
-git subtree pull --prefix vesc_pkg_lib https://github.com/lukash/vesc_pkg_lib.git main --squash
+git subtree pull --prefix vesc_pkg_lib https://github.com/DSparks156x/vesc_pkg_lib.git main --squash
 ```

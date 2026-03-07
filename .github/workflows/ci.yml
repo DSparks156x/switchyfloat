@@ -24,5 +24,3 @@ jobs:
       - name: Build Package
         if: success() || (failure() && steps.clang-format.conclusion == 'failure')
         uses: ./.github/actions/build
-        with:
-          cache-auth-token: '${{ secrets.CACHIX_AUTH_TOKEN }}'

@@ -26,7 +26,7 @@ void footpad_sensor_init(FootpadSensor *fs) {
 }
 
 void footpad_sensor_update(FootpadSensor *fs, const LefloatConfig *config) {
-    if(config->fault_switchy) {
+    if (config->fault_switchy) {
         fs->adc1 = VESC_IF->io_read_analog(VESC_PIN_ADC1);
         // Returns -1.0 if the pin is missing on the hardware
         fs->adc2 = VESC_IF->io_read_analog(VESC_PIN_ADC2);

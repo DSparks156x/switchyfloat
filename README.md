@@ -1,4 +1,6 @@
 # Lefloat - VESC Package
+![BenderFloat](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjliM3pyYm42eTgxbGFjaWE2dHZpamx6eXppMDJvdmJsaXdha3d2NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Tfs6p2WScChVn3HluH/giphy.gif)
+
 Lefloat is a VESC Package for self-balancing skateboards. It aims to:
 - Provide a polished and full-featured user experience
 - Maintain a clean and reliable codebase that is easy to extend
